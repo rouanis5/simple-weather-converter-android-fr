@@ -2,11 +2,13 @@ package com.example.tp2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Celisius extends AppCompatActivity {
 
@@ -64,29 +66,31 @@ public class Celisius extends AppCompatActivity {
         TextView t2 = findViewById(R.id.textView2);
         EditText et = findViewById(R.id.editText);
 
-        if (et.getText().toString() != null){
-            Double n, n1, n2;
-            n = Double.parseDouble(et.getText().toString());
-            switch(currentUnitType){
-                case "C":
-                    n1 = n * 1.8 + 32;
-                    n2 = n + 273.15;
-                    break;
-                case "F":
-                    n1 = (n - 32) / 1.8;
-                    n2 = n1 + 273.15;
-                    break;
-                case "K":
-                    n1 = n - 273.15;
-                    n2 = n * 1.8 - 459.67;
-                    break;
-                default:
-                    n1 = 0.0;
-                    n2 = 0.0;
-                    break;
-            }
-            t1.setText(n1.toString());
-            t2.setText(n2.toString());
+        if (et.getText().toString().matches("")){
+            Toast.makeText(Celisius.this, "remplissez le champ !", Toast.LENGTH_SHORT).show();
+            return;
         }
+        Double n, n1, n2;
+        n = Double.parseDouble(et.getText().toString());
+        switch(currentUnitType){
+            case "C":
+                n1 = n * 1.8 + 32;
+                n2 = n + 273.15;
+                break;
+            case "F":
+                n1 = (n - 32) / 1.8;
+                n2 = n1 + 273.15;
+                break;
+            case "K":
+                n1 = n - 273.15;
+                n2 = n * 1.8 - 459.67;
+                break;
+            default:
+                n1 = 0.0;
+                n2 = 0.0;
+                break;
+        }
+        t1.setText(n1.toString());
+        t2.setText(n2.toString());
     }
 }
